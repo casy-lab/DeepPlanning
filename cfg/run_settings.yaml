@@ -1,0 +1,39 @@
+log_dir: '/home/gent/Tmp/deep_planning_train' # Log Directory
+use_rgb: False                                # Use Camera Images
+use_depth: True                               # Use Depth Images
+state_dim: 3                                  # X, Y, Z
+out_seq_len: 10                               # Number of Steps in Future to Predict
+seq_len: 1                                    # Number of Inputs to Load
+img_width: 224
+img_height: 224
+future_time: 5.0                              # Time in Future to Track the Global Reference (Seconds)
+modes: 3                                      # Modes of Distribution
+velocity_frame: 'bf'
+
+net_params:
+  use_bias: True
+  g_im: 1.0
+  g_ss: 1.0
+  g_pl: 1.0
+  epsilon: 0.01
+  lambda_1: 10
+  lambda_2: 2.0
+  devices: 'CPU'
+  maximum_depth_value: 20000
+
+checkpoint:
+  resume_training: True
+  resume_file: '/home/gent/Tmp/deep_planning_train/20220415-095131/ckpt-1'
+
+run:
+  netupdate_freq: 10
+  setpoint_freq: 20
+  odometry_topic: '/hummingbird/odometry_sensor1/odometry'
+  rgb_topic: '/fr_cam/rgb'
+  depth_topic: '/fr_cam/depth'
+  traj_topic: '/hummingbird/autopilot/pose_command'
+
+train:
+  freeze_backend: True
+  ref_frame: 'bf'
+

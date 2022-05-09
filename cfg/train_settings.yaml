@@ -1,0 +1,42 @@
+log_dir: '/home/gent/Tmp/deep_planning_train' # Log Directory
+use_rgb: False                                # Use Camera Images
+use_depth: True                               # Use Depth Images
+state_dim: 3                                  # X, Y, Z
+out_seq_len: 10                               # Number of Steps in Future to Predict
+seq_len: 1                                    # Number of Inputs to Load
+img_width: 224
+img_height: 224
+future_time: 5.0                              # Time in Future to Track the Global Reference (Seconds)
+modes: 3                                      # Modes of Distribution
+velocity_frame: 'bf'
+
+net_params:
+  use_bias: True
+  g_im: 1.0
+  g_ss: 1.0
+  g_pl: 1.0
+  epsilon: 0.01
+  lambda_1: 10
+  lambda_2: 2.0
+  devices: 'CPU'
+  maximum_depth_value: 20000
+
+checkpoint:
+  resume_training: False
+  resume_file: ""
+
+train:
+  max_training_epochs: 5 #150
+  batch_size: 8
+  freeze_backend: False
+  top_trajectories: 3
+  summary_freq: 400
+  data_save_freq: 15
+  train_dir: "/home/gent/Tmp/rpg_dataset/train_all_7ms/train"
+  val_dir: "/home/gent/Tmp/rpg_dataset/train_all_7ms/test"
+  test_dir: "/home/gent/Tmp/rpg_dataset/train_all_7ms/test"
+  save_every_n_epochs: 5
+  ref_frame: 'bf'
+  img_rootname: 'rollout'
+  img_format: 'png'
+  data_format: 'csv'
